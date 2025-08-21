@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, effect, signal} from '@angular/core';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +7,28 @@ import { Component } from '@angular/core';
   styleUrl: './home-page.css'
 })
 export class HomePage {
+
+  traditionalProperty = 'Fernando';
+  signalProperty = signal<string>('Fernando')
+
   constructor() {
     console.log('HomePage');
+
+    // setTimeout(()=> {
+    //   // this.traditionalProperty = 'Fernandosssssss';
+    //   this.signalProperty.set('Juan Carlos')
+    //   this.traditionalProperty = 'Pedro';
+    //   console.log('Hecho')
+    // },2000)
   }
+
+  basicEffect = effect((onCleanup)=>{
+    console.log('Effect','Disparar efectos secundarios');
+
+    onCleanup(()=> {
+      console.log('Effect','Effecto destruido');
+    })
+  })
 
   ngOnInit(){
     console.log("ngOnInit - Runs once after Angular has initialized all the component's inputs.")
@@ -33,4 +52,11 @@ export class HomePage {
     console.log("ngAfterViewChecked - Runs every time the component's view has been checked for changes.")
   }
 
+  onClickSignal() {
+    this.signalProperty.set(`Santiago Reyes`);
+  }
+
+  onClickTraditional() {
+    this.traditionalProperty = 'Santiago Reyes'
+  }
 }
