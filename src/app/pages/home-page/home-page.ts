@@ -1,8 +1,11 @@
 import {Component, effect, signal} from '@angular/core';
+import {Title} from '../../components/title/title';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [
+    Title
+  ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css'
 })
